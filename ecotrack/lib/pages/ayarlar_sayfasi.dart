@@ -78,3 +78,54 @@ class _AyarlarSayfasiState extends State<AyarlarSayfasi> {
       },
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: VideoArkaPlan(
+        videoYolu: 'assets/videos/settings.mp4',
+        hizalama: const Alignment(-0.45,0.0),
+        icerik: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Ayarlar',
+                  style: GoogleFonts.outfit(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Expanded(
+                child: ListView(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  children: [
+                    
+                    // --- 1. KATEGORİ: HESAP BİLGİLERİM ---
+                    ayarBasligi('Hesap Bilgilerim'),
+                    camKutu(
+                      icerik: Column(
+                        children: [
+                          ayarSatiri(
+                            ikon: Icons.person,
+                            baslik: 'Profil Detayları',
+                            altBilgi: 'Ad, Soyad, Profil Resmi',
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          ayarSatiri(
+                            ikon: Icons.email,
+                            baslik: 'E-posta Değiştir',
+                            altBilgi: 'onur@example.com',
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          ayarSatiri(
+                            ikon: Icons.phone,
+                            baslik: 'Telefon Numarası',
+                            altBilgi: '+90 555 555 55 55',
+                          ),
+                        ],
+                      ),
+                    ),
