@@ -187,3 +187,46 @@ class _AyarlarSayfasiState extends State<AyarlarSayfasi> {
                         ],
                       ),
                     ),
+
+                    // --- 3. KATEGORİ: OTURUM VE GÜVENLİK ---
+                    ayarBasligi('Oturum ve Güvenlik'),
+                    camKutu(
+                      icerik: Column(
+                        children: [
+                          ayarSatiri(
+                            ikon: Icons.lock,
+                            baslik: 'Şifre Değiştir',
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          SwitchListTile(
+                            title: const Text('İki Adımlı Doğrulama', style: TextStyle(color: Colors.white)),
+                            subtitle: const Text('Ekstra hesap güvenliği', style: TextStyle(color: Colors.white60)),
+                            activeThumbColor: Colors.greenAccent,
+                            activeTrackColor: Colors.green.withOpacity(0.35),
+                            value: ikiAdimliDogrulama,
+                            onChanged: (deger) {
+                              setState(() {
+                                ikiAdimliDogrulama = deger;
+                              });
+                            },
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          ayarSatiri(
+                            ikon: Icons.exit_to_app,
+                            baslik: 'Oturumu Kapat',
+                            renk: Colors.redAccent,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
