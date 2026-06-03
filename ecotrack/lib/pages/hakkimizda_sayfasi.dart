@@ -127,3 +127,55 @@ class _HakkimizdaSayfasiState extends State<HakkimizdaSayfasi> {
       ),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: VideoArkaPlan(
+        videoYolu: 'assets/videos/about.mp4',
+        hizalama: const Alignment(0.5, 0.0),
+        icerik: SafeArea(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Center(
+                  child: Text(
+                    'Hakkımızda',
+                    style: GoogleFonts.outfit(
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 20),
+                camKutu(
+                  baslik: 'Biz Kimiz?',
+                  icerik: 'EcoTrack, çevre dostu yaşam tarzını destekleyen bir platformdur. Misyonumuz, insanların çevre üzerindeki etkisini azaltmalarına yardımcı olmaktır.',
+                ),
+                const SizedBox(height: 15),
+                camKutu(
+                  baslik: 'Vizyonumuz',
+                  icerik: 'Gelecekte, herkesin sürdürülebilir bir yaşam tarzını benimseyerek gezegenimizi koruduğu bir dünya hayal ediyoruz.',
+                ),
+                const SizedBox(height: 15),
+                camKutu(
+                  baslik: 'Değerlerimiz',
+                  icerik: 'Çevre bilinci, topluluk desteği ve sürekli gelişim, EcoTrack\'in temel değerleridir.',
+                ),
+                const SizedBox(height: 25),
+
+                // İletişim Formu Başlığı
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 12.0),
+                  child: Text(
+                    'İletişim & Öneri Formu',
+                    style: GoogleFonts.outfit(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.greenAccent,
+                    ),
+                  ),
+                ),
