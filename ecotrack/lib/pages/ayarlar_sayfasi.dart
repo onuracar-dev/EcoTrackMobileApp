@@ -38,3 +38,43 @@ class _AyarlarSayfasiState extends State<AyarlarSayfasi> {
       ),
     );
   }
+
+  Widget ayarBasligi(String baslik) {
+    return Padding(
+      padding: const EdgeInsets.only(left: 8.0, top: 20.0, bottom: 8.0),
+      child: Text(
+        baslik,
+        style: GoogleFonts.outfit(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.greenAccent,
+        ),
+      ),
+    );
+  }
+
+  // Tıklanabilir, backend'i olmayan ayar satırları için yardımcı widget
+  Widget ayarSatiri({
+    required IconData ikon,
+    required String baslik,
+    String? altBilgi,
+    Color renk = Colors.white,
+  }) {
+    return ListTile(
+      leading: Icon(ikon, color: renk == Colors.white ? Colors.greenAccent : renk),
+      title: Text(baslik, style: TextStyle(color: renk)),
+      subtitle: altBilgi != null ? Text(altBilgi, style: const TextStyle(color: Colors.white60)) : null,
+      trailing: const Icon(Icons.chevron_right, color: Colors.white54),
+      onTap: () {
+        // Backend olmadığı için kullanıcıya bilgi veren küçük bir uyarı gösteriyoruz
+        ScaffoldMessenger.of(context).clearSnackBars();
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('"$baslik" özelliği yakında aktif edilecektir.'),
+            backgroundColor: Colors.black87,
+            duration: const Duration(seconds: 2),
+          ),
+        );
+      },
+    );
+  }
