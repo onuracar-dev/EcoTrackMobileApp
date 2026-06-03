@@ -64,3 +64,100 @@ class _AtikNoktalariSayfasiState extends State<AtikNoktalariSayfasi> {
       await launchUrl(url, mode: LaunchMode.externalApplication);
     }
   }
+
+    @override
+  Widget build(BuildContext context) {
+    // Seçilen kategoriye göre noktaları filtrele
+    List<AtikNoktasi> filtrelenmisNoktalar = [];
+    
+    if (secilenKategori == 'Tümü') {
+      // Eğer "Tümü" seçiliyse, listedeki her şeyi göster
+      filtrelenmisNoktalar = tumNoktalar;
+    } else {
+      // Değilse, sadece seçilen kategoriyi içeren noktaları göster
+      for (var nokta in tumNoktalar) {
+        if (nokta.turler.contains(secilenKategori)) {
+          filtrelenmisNoktalar.add(nokta);
+        }
+      }
+    }
+
+    // Filtrelenmiş noktalardan harita marker'larını (harita ikonlarını) oluştur
+    List<Marker> haritaIsaretleri = [];
+    for (var nokta in filtrelenmisNoktalar) {
+      haritaIsaretleri.add(
+        Marker(
+          point: nokta.konum,
+          child: const Icon(
+            Icons.location_on,
+            color: Colors.green,
+            size: 40,
+          ),
+        ),
+      );
+    }
+
+    return Scaffold(
+      body: VideoArkaPlan(
+        videoYolu: 'assets/videos/maps.mp4',
+        icerik: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Atık Noktaları',
+                  style: GoogleFonts.outfit(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              
+              // Kategori Filtre Butonları (Yatay Kaydırılabilir)
+              Container(
+                height: 45,
+                margin: const EdgeInsets.only(bottom: 16.0),
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  itemCount: kategoriler.length,
+                  itemBuilder: (context, index) {
+                    String kategori = kategoriler[index];
+                    bool aktifMi = (secilenKategori == kategori);
+
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          secilenKategori = kategori;
+                        });
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.only(right: 8.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10.0),
+                        decoration: BoxDecoration(
+                          // Aktif olana göre farklı renk ve saydamlık (Cam tasarımı)
+                          color: aktifMi 
+                              ? Colors.green.withOpacity(0.35) 
+                              : Colors.black45,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(
+                            color: aktifMi ? Colors.greenAccent : Colors.white24,
+                            width: 1.5,
+                          ),
+                        ),
+                        child: Center(
+                          child: Text(
+                            kategori,
+                            style: TextStyle(
+                              color: aktifMi ? Colors.white : Colors.white70,
+                              fontWeight: aktifMi ? FontWeight.bold : FontWeight.normal,
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
