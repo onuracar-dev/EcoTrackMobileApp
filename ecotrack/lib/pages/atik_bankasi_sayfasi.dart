@@ -31,3 +31,26 @@ class _AtikBankasiSayfasiState extends State<AtikBankasiSayfasi> {
     super.initState();
     aramaSonuclari = veritabani;
   }
+
+    void aramaYap(String arananKelime) {
+    List<Map<String, String>> geciciListe = [];
+    
+    if (arananKelime.isEmpty) {
+      geciciListe = veritabani;
+    } else {
+      String kucukHarfliArama = arananKelime.toLowerCase();
+      
+      for (int i = 0; i < veritabani.length; i++) {
+        String isim = veritabani[i]["name"]!.toLowerCase();
+        String kategori = veritabani[i]["category"]!.toLowerCase();
+        
+        if (isim.contains(kucukHarfliArama) || kategori.contains(kucukHarfliArama)) {
+          geciciListe.add(veritabani[i]);
+        }
+      }
+    }
+
+    setState(() {
+      aramaSonuclari = geciciListe;
+    });
+  }
