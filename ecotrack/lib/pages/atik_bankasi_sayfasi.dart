@@ -54,3 +54,89 @@ class _AtikBankasiSayfasiState extends State<AtikBankasiSayfasi> {
       aramaSonuclari = geciciListe;
     });
   }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: VideoArkaPlan(
+        videoYolu: 'assets/videos/bank.mp4',
+        icerik: SafeArea(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Text(
+                  'Atık Bankası',
+                  style: GoogleFonts.outfit(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: TextField(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: 'Atık türü yazın...',
+                    hintStyle: const TextStyle(color: Colors.white54),
+                    filled: true,
+                    fillColor: Colors.black54,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(15),
+                      borderSide: BorderSide.none,
+                    ),
+                    prefixIcon: const Icon(Icons.search, color: Colors.white),
+                  ),
+                  onChanged: (deger) {
+                    aramaYap(deger);
+                  },
+                ),
+              ),
+              const SizedBox(height: 10),
+              Expanded(
+                child: ListView.builder(
+                  padding: const EdgeInsets.only(bottom: 80),
+                  itemCount: aramaSonuclari.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: BackdropFilter(
+                          filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                          child: Container(
+                            color: Colors.white.withOpacity(0.1),
+                            child: ListTile(
+                              title: Text(
+                                aramaSonuclari[index]["name"]!,
+                                style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                              ),
+                              subtitle: Text(
+                                aramaSonuclari[index]["desc"]!,
+                                style: const TextStyle(color: Colors.white70),
+                              ),
+                              trailing: Text(
+                                aramaSonuclari[index]["points"]!,
+                                style: const TextStyle(
+                                  color: Colors.greenAccent,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
