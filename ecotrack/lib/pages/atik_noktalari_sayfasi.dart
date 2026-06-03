@@ -161,3 +161,65 @@ class _AtikNoktalariSayfasiState extends State<AtikNoktalariSayfasi> {
                   },
                 ),
               ),
+              // Harita Alanı
+              Expanded(
+                flex: 2,
+                child: Container(
+                  margin: const EdgeInsets.symmetric(horizontal: 16.0),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(color: Colors.white24, width: 2),
+                  ),
+                  clipBehavior: Clip.hardEdge,
+                  child: FlutterMap(
+                    options: const MapOptions(
+                      initialCenter: LatLng(41.3284, 36.2699),
+                      initialZoom: 14.0,
+                    ),
+                    children: [
+                      TileLayer(
+                        urlTemplate: 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png',
+                        subdomains: const ['a', 'b', 'c', 'd'],
+                        userAgentPackageName: 'com.example.ecotrack',
+                      ),
+                      MarkerLayer(
+                        markers: haritaIsaretleri,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              
+              // Alt Kısımdaki Detay Kartları Listesi
+              Expanded(
+                flex: 1,
+                child: ListView.builder(
+                  padding: const EdgeInsets.all(16.0),
+                  itemCount: filtrelenmisNoktalar.length,
+                  itemBuilder: (context, index) {
+                    final nokta = filtrelenmisNoktalar[index];
+                    return Card(
+                      color: Colors.black54,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                      child: ListTile(
+                        leading: const Icon(Icons.location_on, color: Colors.greenAccent),
+                        title: Text(nokta.isim, style: const TextStyle(color: Colors.white)),
+                        subtitle: Text(nokta.detay, style: const TextStyle(color: Colors.white70)),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.directions, color: Colors.greenAccent),
+                          onPressed: () {
+                            yolTarifiAc(nokta.konum);
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
