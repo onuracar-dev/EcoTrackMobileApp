@@ -129,3 +129,61 @@ class _AyarlarSayfasiState extends State<AyarlarSayfasi> {
                         ],
                       ),
                     ),
+
+                    // --- 2. KATEGORİ: ARAYÜZ TERCİHLERİ ---
+                    ayarBasligi('Arayüz Tercihleri'),
+                    camKutu(
+                      icerik: Column(
+                        children: [
+                          SwitchListTile(
+                            title: const Text('Karanlık Mod', style: TextStyle(color: Colors.white)),
+                            subtitle: const Text('Göz sağlığınız için koyu tema', style: TextStyle(color: Colors.white60)),
+                            activeThumbColor: Colors.greenAccent,
+                            activeTrackColor: Colors.green.withOpacity(0.35),
+                            value: karanlikMod,
+                            onChanged: (deger) {
+                              setState(() {
+                                karanlikMod = deger;
+                              });
+                            },
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          SwitchListTile(
+                            title: const Text('Bildirimler', style: TextStyle(color: Colors.white)),
+                            subtitle: const Text('Önemli duyurulardan haberdar olun', style: TextStyle(color: Colors.white60)),
+                            activeThumbColor: Colors.greenAccent,
+                            activeTrackColor: Colors.green.withOpacity(0.35),
+                            value: bildirimler,
+                            onChanged: (deger) {
+                              setState(() {
+                                bildirimler = deger;
+                              });
+                            },
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          SwitchListTile(
+                            title: const Text('Otomatik Güncellemeler', style: TextStyle(color: Colors.white)),
+                            activeThumbColor: Colors.greenAccent,
+                            activeTrackColor: Colors.green.withOpacity(0.35),
+                            value: otomatikGuncelleme,
+                            onChanged: (deger) {
+                              setState(() {
+                                otomatikGuncelleme = deger;
+                              });
+                            },
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          ayarSatiri(
+                            ikon: Icons.language,
+                            baslik: 'Uygulama Dili',
+                            altBilgi: 'Türkçe',
+                          ),
+                          const Divider(color: Colors.white12, height: 1),
+                          ayarSatiri(
+                            ikon: Icons.color_lens,
+                            baslik: 'Tema Rengi',
+                            altBilgi: 'Zümrüt Yeşili (Varsayılan)',
+                          ),
+                        ],
+                      ),
+                    ),
