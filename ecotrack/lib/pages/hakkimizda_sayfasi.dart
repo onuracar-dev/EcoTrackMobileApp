@@ -179,3 +179,144 @@ class _HakkimizdaSayfasiState extends State<HakkimizdaSayfasi> {
                     ),
                   ),
                 ),
+              
+                // Duyarlı (Responsive) Cam Kutu Form Alanı
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(20.0),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.08),
+                        border: Border.all(color: Colors.white.withOpacity(0.15)),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: LayoutBuilder(
+                        builder: (context, constraints) {
+                          // Eğer ekran genişliği 600 pikselden fazla ise (Chrome Web gibi geniş ekranlar)
+                          if (constraints.maxWidth > 600) {
+                            return Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // Sol Taraf: Ad, E-posta, Telefon
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    children: [
+                                      girdiAlani(
+                                        controller: _isimController,
+                                        etiket: 'Ad Soyad',
+                                        ikon: Icons.person,
+                                      ),
+                                      girdiAlani(
+                                        controller: _epostaController,
+                                        etiket: 'E-posta',
+                                        ikon: Icons.email,
+                                      ),
+                                      girdiAlani(
+                                        controller: _telefonController,
+                                        etiket: 'Telefon',
+                                        ikon: Icons.phone,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                const SizedBox(width: 20),
+                                // Sağ Taraf: Şikayet & Öneri ve Gönder Butonu
+                                Expanded(
+                                  flex: 1,
+                                  child: Column(
+                                    children: [
+                                      girdiAlani(
+                                        controller: _mesajController,
+                                        etiket: 'Şikayet ve Öneriniz',
+                                        ikon: Icons.message,
+                                        maxSatir: 6,
+                                      ),
+                                      const SizedBox(height: 8),
+                                      SizedBox(
+                                        width: double.infinity,
+                                        height: 48,
+                                        child: ElevatedButton.icon(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor: Colors.green,
+                                            foregroundColor: Colors.white,
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.circular(12),
+                                            ),
+                                          ),
+                                          onPressed: _formuGonder,
+                                          icon: const Icon(Icons.send),
+                                          label: const Text(
+                                            'Gönder',
+                                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          } else {
+                            // Dar ekranlar için (Mobil Dikey Düzen): Tüm alanlar alt alta
+                            return Column(
+                              children: [
+                                girdiAlani(
+                                  controller: _isimController,
+                                  etiket: 'Ad Soyad',
+                                  ikon: Icons.person,
+                                ),
+                                girdiAlani(
+                                  controller: _epostaController,
+                                  etiket: 'E-posta',
+                                  ikon: Icons.email,
+                                ),
+                                girdiAlani(
+                                  controller: _telefonController,
+                                  etiket: 'Telefon',
+                                  ikon: Icons.phone,
+                                ),
+                                girdiAlani(
+                                  controller: _mesajController,
+                                  etiket: 'Şikayet ve Öneriniz',
+                                  ikon: Icons.message,
+                                  maxSatir: 4,
+                                ),
+                                const SizedBox(height: 12),
+                                SizedBox(
+                                  width: double.infinity,
+                                  height: 48,
+                                  child: ElevatedButton.icon(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.green,
+                                      foregroundColor: Colors.white,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                    ),
+                                    onPressed: _formuGonder,
+                                    icon: const Icon(Icons.send),
+                                    label: const Text(
+                                      'Gönder',
+                                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
